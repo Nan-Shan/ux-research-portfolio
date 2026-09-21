@@ -2,8 +2,8 @@ import { useMemo, useState } from 'react'
 import { cases, CATEGORIES, type CaseItem } from '@/data/cases'
 import { X, FileText, ExternalLink, Mail } from 'lucide-react'
 
-const caseUrl = (file: string) => `/cases/${encodeURI(file)}`
-const coverUrl = (file: string) => `/covers/${encodeURI(file.replace(/\.pdf$/, '.png'))}`
+const caseUrl = (file: string) => `cases/${encodeURI(file)}`
+const coverUrl = (file: string) => `covers/${encodeURI(file.replace(/\.pdf$/, '.png'))}`
 
 function Hero() {
   return (
