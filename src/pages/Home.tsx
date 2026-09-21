@@ -206,7 +206,7 @@ export default function Home() {
         <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-6 py-12 md:flex-row md:items-center">
           <div>
             <p className="text-lg font-semibold text-white">闫婷婷 · 资深用户研究工程师</p>
-            <p className="mt-1 text-sm">求职意向：高级用户研究岗</p>
+            <p className="mt-1 text-sm">求职意向：资深用户研究岗</p>
           </div>
           <a
             href="mailto:tingyan90@163.com"
