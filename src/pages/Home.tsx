@@ -1,6 +1,7 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { cases, CATEGORIES, type CaseItem } from '@/data/cases'
 import { X, FileText, ExternalLink, Mail } from 'lucide-react'
+import PdfViewer from '@/components/PdfViewer'
 
 const caseUrl = (file: string) => `cases/${encodeURI(file)}`
 const coverUrl = (file: string) => `covers/${encodeURI(file.replace(/\.pdf$/, '.png'))}`
@@ -106,10 +107,19 @@ function CaseCard({ item, onOpen }: { item: CaseItem; onOpen: (c: CaseItem) => v
 }
 
 function CaseModal({ item, onClose }: { item: CaseItem; onClose: () => void }) {
+  // 打开弹窗时锁定背景滚动
+  useEffect(() => {
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = prev
+    }
+  }, [])
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 sm:p-4" onClick={onClose}>
       <div
-        className="flex h-[90vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
+        className="flex h-[100dvh] w-full flex-col overflow-hidden bg-white shadow-2xl sm:h-[92vh] sm:max-w-5xl sm:rounded-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start justify-between gap-4 border-b border-stone-200 p-5">
@@ -139,7 +149,7 @@ function CaseModal({ item, onClose }: { item: CaseItem; onClose: () => void }) {
             </button>
           </div>
         </div>
-        <iframe src={caseUrl(item.file)} title={item.title} className="h-full w-full flex-1 bg-stone-100" />
+        <PdfViewer url={caseUrl(item.file)} />
       </div>
     </div>
   )
